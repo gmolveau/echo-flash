@@ -1,0 +1,35 @@
+{{ with .flashes }}
+<link href="/static/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+<script src="/static/js/plugins/toastr/toastr.min.js"></script>
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "progressBar": false,
+        "preventDuplicates": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "0",
+        "hideDuration": "0",
+        "timeOut": "0",
+        "extendedTimeOut": "0",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+<script>
+    {{range .}}
+        {{ if eq .Type "success" }}
+            toastr.success( {{.Message}}, 'Succès', {timeOut: 5000});
+        {{ else if eq .Type "notice" }}
+            toastr.notice( {{.Message}}, 'Notice');
+        {{ else if eq .Type "warning" }}
+            toastr.warning( {{.Message}}, 'Attention');
+        {{ else if eq .Type "error" }}
+            toastr.error( {{.Message}}, 'Erreur');
+        {{ end }}
+    {{ end }}
+</script>
+{{ end }}
