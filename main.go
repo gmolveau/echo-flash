@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"encoding/json"
+	"html/template"
 	"io/fs"
 	"net/http"
 
@@ -31,6 +32,7 @@ var TplConfig = echotemplate.TemplateConfig{
 	Master:       "layouts/master",
 	Partials:     []string{},
 	DisableCache: false,
+	Funcs:        make(template.FuncMap),
 	Delims:       echotemplate.Delims{Left: "{{", Right: "}}"},
 }
 
